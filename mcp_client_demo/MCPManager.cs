@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace mcp_client_demo
 {
-    public class LlmManager
+    public class MCPManager
     {
         private static async Task<IMcpClient> GetMcpClientAsync()
         {
@@ -42,11 +42,11 @@ namespace mcp_client_demo
             return await factory.GetClientAsync("test");
         }
 
-        public static async Task<(IMcpClient client, List<AITool> tools)> InitializeLlmAsync()
+        public static async Task<(IMcpClient client, List<AITool> tools)> InitializeMCPAsync()
         {
-            Console.WriteLine("Initializing MCP 'fetch' server");
+            Console.WriteLine("Initializing MCP 'fetch' client");
             var client = await GetMcpClientAsync();
-            Console.WriteLine("MCP 'everything' server initialized");
+            Console.WriteLine("MCP 'everything' client initialized");
             Console.WriteLine("Listing tools...");
             var listToolsResult = await client.ListToolsAsync();
             var mappedTools = listToolsResult.Tools.Select(t => t.ToAITool(client)).ToList();
